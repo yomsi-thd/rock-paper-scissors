@@ -24,7 +24,10 @@
         let humanRoundOutcome;
 
         //--For every round, Each player will then choose between "Rock", "Paper", "Scissors"--
-        humanChoice = prompt(`Please pick either "Rock", "Paper", "Scissors"`)
+        humanChoice = prompt(`
+        Round ${rounds}
+        Please pick either "Rock", "Paper", "Scissors"
+        `)
         humanChoice = humanChoice.toLowerCase();
         let randomNumber = Math.floor(Math.random() * 3) + 1;
         switch(randomNumber){
@@ -76,7 +79,8 @@
             case "win":
                 humanScore += 1;
                 alert(`
-                You won this round! 
+                Round ${rounds}
+                You won this round!
                 Computer: ${computerScore}
                 You: ${humanScore}
                 `);
@@ -84,6 +88,7 @@
             case "lose":
                 computerScore += 1;
                 alert(`
+                ${rounds}
                 Computer won this round! 
                 Computer: ${computerScore}
                 You: ${humanScore}
@@ -91,6 +96,7 @@
                 break;
             case "draw":
                 alert(`
+                ${rounds}
                 It's a draw! 
                 Computer: ${computerScore}
                 You: ${humanScore}
