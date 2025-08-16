@@ -10,9 +10,31 @@
 </body>
 <script>
     //--Rock Paper Scissors is a game played between 2 players (human & computer) where each player can choose between "Rock", "Paper", "Scissors"--
-
     let humanScore = 0;
-    let computerscore = 0;
+    let computerScore = 0;
+    
+
+    //--There are 5 rounds in 1 game.--
+    function playGame(){
+        playRound();
+        playRound();
+        playRound();
+        playRound();
+        playRound();
+         //--After 5 rounds, the player with the highest score wins the game. If players' scores are the same, it's a draw.--
+        if (humanScore > computerScore){
+            alert("You Win!");
+        } else if (computerScore > humanScore){
+            alert("You lose! Better luck next time.");
+        } else{
+            alert("You draw! That's a 0.4115 percent of this happening!");
+        }
+    };
+
+    //--There are 3 outcomes for a player to a round: win, lose, draw.--
+    let humanRoundOutcome;
+
+    //--For every round, Each player will then choose between "Rock", "Paper", "Scissors"--
     function getComputerChoice(){
         let randomNumber = Math.floor(Math.random() * 3) + 1;
         switch(randomNumber){
@@ -33,31 +55,10 @@
         `)
         return humanChoice.toLowerCase();
     }
-
     let computerChoice = getComputerChoice();
     let humanChoice = getHumanChoice();
 
-    //--There are 5 rounds in 1 game.--
-    function playGame(){
-        playRound();
-        playRound();
-        playRound();
-        playRound();
-        playRound();
-         //--After 5 rounds, the player with the highest score wins the game. If players' scores are the same, it's a draw.--
-        if (humanScore > computerScore){
-            alert("You Win!");
-        } else if (computerScore > humanScore){
-            alert("You lose! Better luck next time.");
-        } else{
-            alert("You draw! That's a 0.4115 percent of this happening!");
-        }
-    }
 
-    //--There are 3 outcomes for a player to a round: win, lose, draw.--
-    let humanRoundOutcome;
-
-    //--For every round, Each player will then choose between "Rock", "Paper", "Scissors"--
     function playRound(computerChoice, humanChoice){
         if (humanChoice === "rock" && computerChoice === "scissors" || humanChoice == "scissors" && computerChoice == "rock"){
             if (humanChoice === "rock"){
