@@ -16,11 +16,19 @@
 
     //--There are 5 rounds in 1 game.--
     function playGame(){
-        playRound();
-        playRound();
-        playRound();
-        playRound();
-        playRound();
+        playRound(computerChoice, humanChoice);
+        computerChoice = getComputerChoice();
+        humanChoice = getHumanChoice();
+        playRound(computerChoice, humanChocie);
+        computerChoice = getComputerChoice();
+        humanChoice = getHumanChoice();
+        playRound(computerChoice, humanChoice);
+        computerChoice = getComputerChoice();
+        humanChoice = getHumanChoice();
+        playRound(computerChoice, humanChoice);
+        computerChoice = getComputerChoice();
+        humanChoice = getHumanChoice();
+        playRound(computerChoice, humanChoice);
          //--After 5 rounds, the player with the highest score wins the game. If players' scores are the same, it's a draw.--
         if (humanScore > computerScore){
             alert("You Win!");
@@ -85,11 +93,11 @@
                 humanRoundOutcome = "lose";
             }
         }
-
         //--If both player pick the same pick, it's a draw --
-        if (humanChoice === computerChoice){
+        if (humanChoice == computerChoice){
             humanRoundOutcome = "draw";
         }
+
         //--The winner will gain 1 point for each round they win. If it's a draw, no one gains a point. The winner is announced by the end of every round--
         switch (humanRoundOutcome){
             case "win":
@@ -115,10 +123,9 @@
                 You: ${humanScore}
                 `);
                 break;
-        }
-    };
+        };
 
-    
+    };
     
 
    playGame();
