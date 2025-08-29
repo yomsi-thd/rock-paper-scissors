@@ -14,19 +14,10 @@
     let computerChoice = "";
     let humanScore = 0;
     let computerScore = 0;
+    let rounds = 0;
 
-    //--There are 5 rounds in 1 game.--
-    for (let rounds = 1; rounds <= 5; rounds++){
-        //--There are 3 outcomes for a player to a round: win, lose, draw.--
-        let humanRoundOutcome;
-
-        //--For every round, Each player will then choose between "Rock", "Paper", "Scissors"--
-        humanChoice = prompt(`
-        Round ${rounds}
-        Please pick either "Rock", "Paper", "Scissors"
-        `)
-        humanChoice = humanChoice.toLowerCase();
-        let randomNumber = Math.floor(Math.random() * 3) + 1;
+    function getComputerChoice(){
+        let randomNumber = Math.floor(Math.random() * 3) + 1; //Pick a number from 1 to 3
         switch(randomNumber){
             case 1:
                 computerChoice = "rock";
@@ -38,6 +29,40 @@
                 computerChoice = "scissors";
                 break;
         }
+    }
+    function getHumanChoice(){
+        humanChoice = prompt(`
+        Round ${rounds}
+        Please pick either "Rock", "Paper", "Scissors"
+        `)
+        humanChoice = humanChoice.toLowerCase();
+    }
+
+    function playGame(){
+         //--There are 5 rounds in 1 game.--
+        playRound();
+        playRound();
+        playRound();
+        playRound();
+        playRound();
+        //--After 5 rounds, the player with the highest score wins the game.  If players' scores are the same, it's a draw.--
+        //--There's 3 outcomes to 1 game: win, lose, draw--
+        if (humanScore > computerScore){
+            alert("You Win!");
+        } else if (computerScore > humanScore){
+            alert("You lose! Better luck next time.");
+        } else{
+            alert("You draw! That's a 0.4115 percent of this happening!");
+        }
+    }
+
+    function playRound(){
+        rounds += 1 //Increase rounds number for player to keep track of during the winner announcement 
+        //--There are 3 outcomes for a player to a round: win, lose, draw.--
+        let humanRoundOutcome = "";
+        //--For every round, Each player will then choose between "Rock", "Paper", "Scissors"--
+        getComputerChoice();
+        getHumanChoice();
 
         //--Those who picks "Rock" win against those who picks "Scissors"--
         if (humanChoice === "rock" && computerChoice === "scissors" || humanChoice == "scissors" && computerChoice == "rock"){
@@ -47,7 +72,6 @@
                 humanRoundOutcome = "lose";
             }
         }
-
         //--Those who picks "Scissors" win against those who picks "Paper"--
         if (humanChoice === "scissors" && computerChoice === "paper" || humanChoice == "paper" && computerChoice == "scissors"){
             if (humanChoice === "scissors"){
@@ -56,7 +80,6 @@
                 humanRoundOutcome = "lose";
             }
         }
-
         //--Those who picks "Paper" win against those who picks "Rock"--
         if (humanChoice === "paper" && computerChoice === "rock" || humanChoice == "rock" && computerChoice == "paper"){
             if (humanChoice === "scissors"){
@@ -65,11 +88,11 @@
                 humanRoundOutcome = "lose";
             }
         }
-
         //--If both player pick the same pick, it's a draw --
         if (humanChoice === computerChoice){
             humanRoundOutcome = "draw";
         }
+
 
         //--The winner will gain 1 point for each round they win. If it's a draw, no one gains a point. The winner is announced by the end of every round--
         switch (humanRoundOutcome){
@@ -101,13 +124,9 @@
                 break;
         }
     }
-    //--After 5 rounds, the player with the highest score wins the game.  If players' scores are the same, it's a draw.--
-    if (humanScore > computerScore){
-        alert("You Win!");
-    } else if (computerScore > humanScore){
-        alert("You lose! Better luck next time.");
-    } else{
-        alert("You draw! That's a 0.4115 percent of this happening!");
-    }
+    
+    playGame(); //Start the game
+
+    
 </script>
 </html>
