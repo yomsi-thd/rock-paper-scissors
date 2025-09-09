@@ -7,11 +7,11 @@
 </head>
 <body>
     <h1>Rock Paper Scissors 🪨📰✂️</h1>
-    <p>Round: </p>
+    <p id="round">Round: </p>
     <p id="announcement"></p>
     <div class="result">
-        <p>Computer: </p>
-        <p>Human: </p>
+        <p id="computer">Computer: </p>
+        <p id="human">You: </p>
     </div>
     <button id="rock">🪨</button>
     <button id="paper">📰</button>
@@ -87,24 +87,35 @@
         }
         
         //--The winner will gain 1 point for each round they win. If it's a draw, no one gains a point. The winner is announced by the end of every round--
+        const announcement = document.querySelector("p#announcement");
         switch (humanRoundOutcome){
             case "win":
                 humanScore += 1;
+                announcement.textContent = `You won this round!`;
                 break;
             case "lose":
                 computerScore += 1;
+                announcement.textContent = `Computer won this round!`;
                 break;
             case "draw":
+                announcement.textContent = `It's a draw!`;
                 break;
         }
-
-
+        const roundAnnouncer = document.querySelector("p#round");
+        roundAnnouncer.textContent = `Round: ${rounds}`;
+        const humanScoreAnnouncer = document.querySelector("p#human");
+        humanScoreAnnouncer.textContent = `You: ${humanScore}`;
+        const computerScoreAnnouncer = document.querySelector("p#computer");
+        computerScoreAnnouncer.textContent = `Computer: ${computerScore}`;
+        
         //--The first player to gain 5 points wins the game--
-
+        if (humanScore === 5){
+            announcement.textContent = `You Win!`;
+        }
+        if (computerScore === 5){
+            announcement.textContent = `You lose! Better luck next time.`;
+        }
     }
-
-
-
     
 </script>
 </html>
