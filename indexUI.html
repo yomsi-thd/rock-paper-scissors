@@ -45,26 +45,65 @@
     const buttons = document.querySelectorAll("button");
     buttons.forEach((button) => button.addEventListener("click", () =>{
         humanChoice = button.id;
-        playRound();
         //Once the player click a button, 2 players have confirm their options and a round can start immediately
+        getComputerChoice();
+        playRound();
     }));
-    
-    //--There are 3 outcomes for a player to a round: win, lose, draw.--
+
     function playRound(){
+        //--There are 3 outcomes for a player to a round: win, lose, draw.--
+        let humanRoundOutcome = "";
+        rounds += 1 //Increase rounds number for player to keep track of during the winner announcement 
+        //--Those who picks "Rock" win against those who picks "Scissors"--
+        if (humanChoice === "rock" && computerChoice === "scissors" || humanChoice == "scissors" && computerChoice == "rock"){
+            if (humanChoice === "rock"){
+                humanRoundOutcome = "win";
+            } else{
+                humanRoundOutcome = "lose";
+            }
+        };
+
+        //--Those who picks "Scissors" win against those who picks "Paper"--
+        if (humanChoice === "scissors" && computerChoice === "paper" || humanChoice == "paper" && computerChoice == "scissors"){
+            if (humanChoice === "scissors"){
+                humanRoundOutcome = "win";
+            } else{
+                humanRoundOutcome = "lose";
+            }
+        }
+
+        //--Those who picks "Paper" win against those who picks "Rock"--
+        if (humanChoice === "paper" && computerChoice === "rock" || humanChoice == "rock" && computerChoice == "paper"){
+            if (humanChoice === "scissors"){
+                humanRoundOutcome = "win";
+            } else{
+                humanRoundOutcome = "lose";
+            }
+        }
+
+        //--If both player pick the same pick, it's a draw --
+        if (humanChoice === computerChoice){
+            humanRoundOutcome = "draw";
+        }
+        
+        //--The winner will gain 1 point for each round they win. If it's a draw, no one gains a point. The winner is announced by the end of every round--
+        switch (humanRoundOutcome){
+            case "win":
+                humanScore += 1;
+                break;
+            case "lose":
+                computerScore += 1;
+                break;
+            case "draw":
+                break;
+        }
+
+
+        //--The first player to gain 5 points wins the game--
 
     }
 
-    //--Those who picks "Rock" win against those who picks "Scissors"--
- 
-    //--Those who picks "Scissors" win against those who picks "Paper"--
-  
-    //--Those who picks "Paper" win against those who picks "Rock"--
-    
-    //--If both player pick the same pick, it's a draw --
 
-    //--The winner will gain 1 point for each round they win. If it's a draw, no one gains a point. The winner is announced by the end of every round--
-        
-    //--The first player to gain 5 points wins the game--
 
     
 </script>
