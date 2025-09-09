@@ -50,7 +50,7 @@
                 break;
         }
     }
-
+    
     const buttons = document.querySelectorAll("button");
     buttons.forEach((button) => button.addEventListener("click", () =>{
         humanChoice = button.id;
@@ -58,6 +58,7 @@
         getComputerChoice();
         playRound();
     }));
+    
 
     function playRound(){
         //--There are 3 outcomes for a player to a round: win, lose, draw.--
@@ -118,9 +119,13 @@
         //--The first player to gain 5 points wins the game--
         if (humanScore === 5){
             announcement.textContent = `You Win!`;
+            const body = document.querySelector("body");
+            buttons.forEach((button) => (body.removeChild(button)));
         }
         if (computerScore === 5){
             announcement.textContent = `You lose! Better luck next time.`;
+            const body = document.querySelector("body");
+            buttons.forEach((button) => (body.removeChild(button)));
         }
     }
     
