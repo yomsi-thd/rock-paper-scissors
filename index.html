@@ -6,15 +6,35 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-    
+    <h1>Rock Paper Scissors 🪨📰✂️</h1>
+    <p id="round">Round: </p>
+    <p id="announcement"></p>
+    <div class="result">
+        <p id="computer">Computer: </p>
+        <p id="human">You: </p>
+    </div>
+    <button id="rock">🪨</button>
+    <button id="paper">📰</button>
+    <button id="scissors">✂️</button>
+
 </body>
 <script>
-    //--Rock Paper Scissors is a game played between 2 players (human & computer) where each player can choose between "Rock", "Paper", "Scissors"--
+    //--Rock Paper Scissors is a game played between 2 players (human & computer) -- 
     let humanChoice = ""; 
     let computerChoice = "";
     let humanScore = 0;
     let computerScore = 0;
     let rounds = 0;
+
+    //--This game is played on an GUI on a webpage that let you keep track of the players' score, the winner of each round/the game--
+    const roundAnnouncer = document.querySelector("p#round");
+    roundAnnouncer.textContent = `Round: ${rounds}`;
+    const humanScoreAnnouncer = document.querySelector("p#human");
+    humanScoreAnnouncer.textContent = `You: ${humanScore}`;
+    const computerScoreAnnouncer = document.querySelector("p#computer");
+    computerScoreAnnouncer.textContent = `Computer: ${computerScore}`;
+
+    //--Each player can choose between "Rock", "Paper", "Scissors". Once they both chose 1 of these 3 options, a round of Rock Paper Scissors starts--
 
     function getComputerChoice(){
         let randomNumber = Math.floor(Math.random() * 3) + 1; //Pick a number from 1 to 3
@@ -30,40 +50,20 @@
                 break;
         }
     }
-    function getHumanChoice(){
-        humanChoice = prompt(`
-        Round ${rounds}
-        Please pick either "Rock", "Paper", "Scissors"
-        `)
-        humanChoice = humanChoice.toLowerCase();
-    }
-
-    function playGame(){
-         //--There are 5 rounds in 1 game.--
+    
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => button.addEventListener("click", () =>{
+        humanChoice = button.id;
+        //Once the player click a button, 2 players have confirm their options and a round can start immediately
+        getComputerChoice();
         playRound();
-        playRound();
-        playRound();
-        playRound();
-        playRound();
-        //--After 5 rounds, the player with the highest score wins the game.  If players' scores are the same, it's a draw.--
-        //--There's 3 outcomes to 1 game: win, lose, draw--
-        if (humanScore > computerScore){
-            alert("You Win!");
-        } else if (computerScore > humanScore){
-            alert("You lose! Better luck next time.");
-        } else{
-            alert("You draw! That's a 0.4115 percent of this happening!");
-        }
-    }
+    }));
+    
 
     function playRound(){
-        rounds += 1 //Increase rounds number for player to keep track of during the winner announcement 
         //--There are 3 outcomes for a player to a round: win, lose, draw.--
         let humanRoundOutcome = "";
-        //--For every round, Each player will then choose between "Rock", "Paper", "Scissors"--
-        getComputerChoice();
-        getHumanChoice();
-
+        rounds += 1 //Increase rounds number for player to keep track of during the winner announcement 
         //--Those who picks "Rock" win against those who picks "Scissors"--
         if (humanChoice === "rock" && computerChoice === "scissors" || humanChoice == "scissors" && computerChoice == "rock"){
             if (humanChoice === "rock"){
@@ -71,7 +71,8 @@
             } else{
                 humanRoundOutcome = "lose";
             }
-        }
+        };
+
         //--Those who picks "Scissors" win against those who picks "Paper"--
         if (humanChoice === "scissors" && computerChoice === "paper" || humanChoice == "paper" && computerChoice == "scissors"){
             if (humanChoice === "scissors"){
@@ -80,6 +81,7 @@
                 humanRoundOutcome = "lose";
             }
         }
+
         //--Those who picks "Paper" win against those who picks "Rock"--
         if (humanChoice === "paper" && computerChoice === "rock" || humanChoice == "rock" && computerChoice == "paper"){
             if (humanChoice === "scissors"){
@@ -88,45 +90,44 @@
                 humanRoundOutcome = "lose";
             }
         }
+
         //--If both player pick the same pick, it's a draw --
         if (humanChoice === computerChoice){
             humanRoundOutcome = "draw";
         }
-
-
-        //--The winner will gain 1 point for each round they win. If it's a draw, no one gains a point. The winner is announced by the end of every round--
+        
+        //--The winner will gain 1 point for each round they win. If it's a draw, no one gains a point. The winner is announced by the end of every round along with the player's score--
+        const announcement = document.querySelector("p#announcement");
         switch (humanRoundOutcome){
             case "win":
                 humanScore += 1;
-                alert(`
-                Round ${rounds}
-                You won this round!
-                Computer: ${computerScore}
-                You: ${humanScore}
-                `);
+                announcement.textContent = `You won this round!`;
                 break;
             case "lose":
                 computerScore += 1;
-                alert(`
-                ${rounds}
-                Computer won this round! 
-                Computer: ${computerScore}
-                You: ${humanScore}
-                `);
+                announcement.textContent = `Computer won this round!`;
                 break;
             case "draw":
-                alert(`
-                ${rounds}
-                It's a draw! 
-                Computer: ${computerScore}
-                You: ${humanScore}
-                `);
+                announcement.textContent = `It's a draw!`;
                 break;
         }
+        
+        roundAnnouncer.textContent = `Round: ${rounds}`;
+        humanScoreAnnouncer.textContent = `You: ${humanScore}`;
+        computerScoreAnnouncer.textContent = `Computer: ${computerScore}`;
+        
+        //--The first player to gain 5 points wins the game--
+        if (humanScore === 5){
+            announcement.textContent = `You Win!`;
+            const body = document.querySelector("body");
+            buttons.forEach((button) => (body.removeChild(button)));
+        }
+        if (computerScore === 5){
+            announcement.textContent = `You lose! Better luck next time.`;
+            const body = document.querySelector("body");
+            buttons.forEach((button) => (body.removeChild(button)));
+        }
     }
-    
-    playGame(); //Start the game
-
     
 </script>
 </html>
