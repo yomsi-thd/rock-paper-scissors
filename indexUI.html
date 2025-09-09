@@ -25,6 +25,15 @@
     let humanScore = 0;
     let computerScore = 0;
     let rounds = 0;
+
+    //--This game is played on an GUI on a webpage that let you keep track of the players' score, the winner of each round/the game--
+    const roundAnnouncer = document.querySelector("p#round");
+    roundAnnouncer.textContent = `Round: ${rounds}`;
+    const humanScoreAnnouncer = document.querySelector("p#human");
+    humanScoreAnnouncer.textContent = `You: ${humanScore}`;
+    const computerScoreAnnouncer = document.querySelector("p#computer");
+    computerScoreAnnouncer.textContent = `Computer: ${computerScore}`;
+
     //--Each player can choose between "Rock", "Paper", "Scissors". Once they both chose 1 of these 3 options, a round of Rock Paper Scissors starts--
 
     function getComputerChoice(){
@@ -86,7 +95,7 @@
             humanRoundOutcome = "draw";
         }
         
-        //--The winner will gain 1 point for each round they win. If it's a draw, no one gains a point. The winner is announced by the end of every round--
+        //--The winner will gain 1 point for each round they win. If it's a draw, no one gains a point. The winner is announced by the end of every round along with the player's score--
         const announcement = document.querySelector("p#announcement");
         switch (humanRoundOutcome){
             case "win":
@@ -101,11 +110,9 @@
                 announcement.textContent = `It's a draw!`;
                 break;
         }
-        const roundAnnouncer = document.querySelector("p#round");
+        
         roundAnnouncer.textContent = `Round: ${rounds}`;
-        const humanScoreAnnouncer = document.querySelector("p#human");
         humanScoreAnnouncer.textContent = `You: ${humanScore}`;
-        const computerScoreAnnouncer = document.querySelector("p#computer");
         computerScoreAnnouncer.textContent = `Computer: ${computerScore}`;
         
         //--The first player to gain 5 points wins the game--
