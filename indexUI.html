@@ -27,6 +27,21 @@
     let rounds = 0;
     //--Each player can choose between "Rock", "Paper", "Scissors". Once they chose 1 of these 3 options, a round of Rock Paper Scissors starts--
 
+    function getComputerChoice(){
+        let randomNumber = Math.floor(Math.random() * 3) + 1; //Pick a number from 1 to 3
+        switch(randomNumber){
+            case 1:
+                computerChoice = "rock";
+                break;
+            case 2:
+                computerChoice = "paper";
+                break;
+            case 3:
+                computerChoice = "scissors";
+                break;
+        }
+    }
+
     //--There are 3 outcomes for a player to a round: win, lose, draw.--
 
     //--Those who picks "Rock" win against those who picks "Scissors"--
