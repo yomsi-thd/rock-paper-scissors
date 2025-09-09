@@ -4,8 +4,9 @@ Rock Paper Scissors is a game played between 2 players (human & computer)
 
 This game is played on an GUI on a webpage that let you keep track of the players' score, the winner of each round/the game.
 
-Each player can choose between "Rock", "Paper", "Scissors". The computer will randomly generate its choice. The player will
-click either "Rock", "Paper", "Scissors".
+Each player can choose between "Rock", "Paper", "Scissors". 
+The computer will randomly generate its choice. 
+The player will click either "🪨", "📰", "✂️" to determine their choice. 
 
 Once the player click a button, a round starts.
 
