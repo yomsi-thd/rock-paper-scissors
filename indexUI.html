@@ -25,7 +25,7 @@
     let humanScore = 0;
     let computerScore = 0;
     let rounds = 0;
-    //--Each player can choose between "Rock", "Paper", "Scissors". Once they chose 1 of these 3 options, a round of Rock Paper Scissors starts--
+    //--Each player can choose between "Rock", "Paper", "Scissors". Once they both chose 1 of these 3 options, a round of Rock Paper Scissors starts--
 
     function getComputerChoice(){
         let randomNumber = Math.floor(Math.random() * 3) + 1; //Pick a number from 1 to 3
@@ -42,7 +42,17 @@
         }
     }
 
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => button.addEventListener("click", () =>{
+        humanChoice = button.id;
+        playRound();
+        //Once the player click a button, 2 players have confirm their options and a round can start immediately
+    }));
+    
     //--There are 3 outcomes for a player to a round: win, lose, draw.--
+    function playRound(){
+
+    }
 
     //--Those who picks "Rock" win against those who picks "Scissors"--
  
